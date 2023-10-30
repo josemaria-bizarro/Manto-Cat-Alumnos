@@ -1,0 +1,210 @@
+<script>
+    window.addEventListener("load",loadInfoDatalist)
+    
+    const ikasleIzena= document.getElementById("datalistOptions"); //todos los datos de la BD
+
+    function loadInfoDatalist()
+    {
+      google.script.run
+      .withSuccessHandler(cargarDatalist)   //si la carga de alumnos fue exitosa ejecuta esta rutina
+      .DataAlumnos()  //Obtiene los datos de la BD de alumnos
+
+      google.script.run
+      .withSuccessHandler(cargaGrupo)
+      .withFailureHandler(datos=>{console.log("error grave")})
+      .dataGrupo()
+      
+    }
+
+    function cargarDatalist(dataAlumnos)  //toma los datos de la BD y los carga en el datalist
+    {
+    
+      const inputAlumnos = document.getElementById("datalistOptions");  //formulario html datalist id
+      dataAlumnos.forEach(alumno => 
+      {
+        
+        const ilara=document.createElement("option") //crea un elemento en el datalist con los datos de cada alumno
+        ilara.value = alumno[0];
+      
+        ilara.dataset.correoInst=alumno[1];
+        matricula=alumno[2];
+        gpoBase=alumno[3];
+        sbGpoB=alumno[4];
+        ilara.dataset.grupoActivo=alumno[5];
+        ilara.dataset.subGrupo=alumno[6];
+        ftermina=alumno[7];
+        turno=alumno[8];
+        opEd=alumno[9];
+        fIngresa=alumno[10];
+        cicloI=alumno[11];
+        statAl=alumno[12];
+        statParc=alumno[13];
+        ilara.dataset.sexo=alumno[14];
+        ilara.dataset.fecNac=alumno[15];
+        ilara.dataset.nomTut=alumno[16];
+        ilara.dataset.correoTutor=alumno[17];
+        ilara.dataset.telCasaTutor=alumno[18];
+        ilara.dataset.celTutor=alumno[19];
+        rec=alumno[20];
+        obs=alumno[21];
+        pantel=alumno[22];
+        numCtl=alumno[23];
+        grupBasOr=alumno[24];
+        grupActOr=alumno[25];
+        usrCap=alumno[26];
+        folio=alumno[27];
+        fecIns=alumno[28];
+        sgrupActOr=alumno[29];
+        campo=alumno[30];
+        ilara.dataset.celAlumno=alumno[31];
+        ilara.dataset.correoAlumno=alumno[32];
+        ilara.dataset.nomTutor2=alumno[33];
+        ilara.dataset.celTut2=alumno[34];
+        ilara.dataset.direccion=alumno[35];
+        ilara.dataset.correoTutor2=alumno[36];
+        actDat=alumno[37];
+        corrTutAnt=alumno[38];
+        fecUmov=alumno[39];
+        ilara.dataset.curp=alumno[40];
+        ilara.dataset.taller=alumno[41];
+        edad=alumno[42];
+        ilara.dataset.escProcede=alumno[43];
+        inputAlumnos.appendChild(ilara);
+        
+      })
+              
+
+    }
+
+
+
+// ***************************************************************************
+// RELLENA LOS CAMPOS DEL FORMULARIO
+
+    function actualizarInfo(datalist) //carga los datos del formulario una vez que se detecta un cambio
+    //datalist es el nombre seleccionado en la lista desplegable
+    //ikasleizena son los datos cargados en el documento
+    {    
+      for(let i=0;i<ikasleIzena.options.length; i++)
+      {
+         if(ikasleIzena.options[i].value == datalist.value)
+            {
+               document.getElementById("correoInst").value=ikasleIzena.options[i].getAttribute("data-correo-Inst");
+               document.getElementById("grupoActivo").value=ikasleIzena.options[i].getAttribute("data-grupo-Activo");
+               document.getElementById("subGrupo").value=ikasleIzena.options[i].getAttribute("data-sub-Grupo");
+               document.getElementById("sexo").value=ikasleIzena.options[i].getAttribute("data-sexo");
+               document.getElementById('celAlumno').value=ikasleIzena.options[i].getAttribute("data-cel-Alumno");
+               document.getElementById("fecNac").value=ikasleIzena.options[i].getAttribute("data-fec-Nac");
+               document.getElementById("correoAlumno").value=ikasleIzena.options[i].getAttribute("data-correo-Alumno");
+               document.getElementById("curp").value=ikasleIzena.options[i].getAttribute("data-curp");
+               document.getElementById("direccion").value=ikasleIzena.options[i].getAttribute("data-direccion");
+               document.getElementById("taller").value=ikasleIzena.options[i].getAttribute("data-taller");
+               document.getElementById("nomTut").value=ikasleIzena.options[i].getAttribute("data-nom-Tut");
+               document.getElementById("correoTutor").value=ikasleIzena.options[i].getAttribute("data-correo-Tutor");
+               document.getElementById("telCasaTutor").value=ikasleIzena.options[i].getAttribute("data-tel-Casa-Tutor");
+               document.getElementById("celTutor").value=ikasleIzena.options[i].getAttribute("data-cel-Tutor");
+               document.getElementById("nomTutor2").value=ikasleIzena.options[i].getAttribute("data-nom-Tutor2");
+               document.getElementById("correoTutor2").value=ikasleIzena.options[i].getAttribute("data-correo-Tutor2");
+               document.getElementById("celTut2").value=ikasleIzena.options[i].getAttribute("data-cel-Tut2");
+               document.getElementById("escProcede").value=ikasleIzena.options[i].getAttribute("data-esc-Procede");
+               
+/* google.script.run
+      .withSuccessHandler(cargaGrupo)
+      .withFailureHandler(datos=>{console.log("error grave")})
+      .dataGrupo()
+               */
+               break;
+            }
+         /* else
+          {
+           console.log("la estoy regando");    
+              document.getElementById("correoInst").value="";
+               document.getElementById("grupoActivo").value="";
+               document.getElementById("subGrupo").value="";
+               document.getElementById("sexo").value="";
+               
+          }
+          */
+      }
+    }
+
+function cargaGrupo(datosGrupo)  //toma los datos de grupo de la BD y los carga en el documento html
+    {
+          
+      const inputGrupo = document.getElementById("listagrupo");  //formulario html
+      datosGrupo.forEach(grupo => 
+      { 
+        if(grupo[7] != "NO")
+        {
+         const ilara=document.createElement("option") //crea un elemento con los datos de cada alumno
+         ilara.value=grupo[1]
+         
+          /*
+          ilara.dataset.grupoActivo=grupo[1];
+          ilara.dataset.subGrupo=grupo[2];
+          */
+          
+          inputGrupo.appendChild(ilara);
+        }
+        
+      })
+      
+    }
+
+
+function actualiza()
+{
+          let espacios="";
+          event.preventDefault();
+          let datuak=[];
+          const form = document.getElementById('formManto');
+          
+           datuak.push(form[0].value,     //NOM
+                        form[1].value,    //correo inst
+                        form[6].value,     //grupo
+                        form[7].value,    //subgrupo
+                        form[8].value,    //sexo
+                        form[9].value,    //fechnac
+                        form[11].value,   //nom tutor
+                        form[12].value,   //correo tutor
+                        form[13].value,   //tel tutor
+                        form[14].value,   //cel tutor
+                        form[15].value,   //nom tutor 2
+                        form[17].value,   //cel tutor 2
+                        form[16].value,   //correo tutor 2
+                        "",               //observaciones
+                        form[2].value,    //cel alumno
+                        form[3].value,    //correo alumno
+                        form[5].value,    //direccion
+                        form[4].value,    //curp
+                        form[10].value,    //taller
+                        form[18].value    //esc Procede
+                      )
+            /*
+                      for (var i =0;i<19;i++)
+                      {
+                        console.log(form[i].value)
+                          datuak.push(form[i].value);
+                      }
+            */
+          google.script.run
+          .withFailureHandler(error=>{console.log("Error en los datos a grabars")})
+          .withSuccessHandler(erroralcargar)
+          .actualizaTabla(datuak);
+      
+        document.getElementById("formManto").reset()
+
+        }
+        
+function erroralcargar(wserror)
+{ if (wserror==1)
+    {
+      alert("   \n     ERROR EN EL PROCESO \n **** ALUMNO NO ACTUALIZADO *****")
+    }
+    else
+    {
+      alert("**************************\n     . \n Cambios realizados, \nrecargue la página (F5)")
+    }
+}
+
+</script>

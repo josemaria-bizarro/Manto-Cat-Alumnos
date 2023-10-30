@@ -1,0 +1,178 @@
+<!doctype html>
+<html lang="es-Mx">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Mantenimiento de Alumnos</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Ubuntu&display=swap" rel="stylesheet">
+    <?!= include('CSS') ?> <!-- aqui se incluyen los datos css -->
+  </head>
+  
+  <body>
+    <div class="encabeza">
+        <img src="https://drive.google.com/uc?export=view&id=1FWmr4utpKYRcFSRTz-XQTvQyudbHZvMw"alt="logo">
+        <h1 class="titulo">Mantenimiento de Alumnos</h1>
+    </div>
+    <!-- <h2 id="logo"><a href="https://ceeccafetales.edu.mx"><img src="https://ceeccafetales.edu.mx/wp-content/themes/ceecV2/images/ceec-logo.svg" style="width:10%" /></a></h2>
+   
+
+<h6 id="logo"><img src="https://drive.google.com/uc?export=view&id=1FWmr4utpKYRcFSRTz-XQTvQyudbHZvMw" style="width:10%" /></a></h6>
+ -->
+    <!-- <p style="color: Dodgerblue;background-color:white; border-style:groove; border-width:5px 20px; border-color:blue red white yellow; border-radius: 15px;margin-left:50px; margin-right:50px; text-transform: capitalize;">Ingresa algun texto para la busqueda de alumno </p>-->
+
+    <p style="color: Dodgerblue;size:8px; margin-left:50px; margin-right:50px; ">Ingresa algun texto para la busqueda de alumno </p>
+
+    
+    <form id="formManto" onsubmit="actualiza(this)"> <!-- nombre del formulario que almacena los datos-->
+      <div class="formulario"> <!-- El nombre de ésta división -->
+
+        <div class="elemento1"> <!-- Lista desplegable de alumnos -->
+            <label for="alumnosDataList" class="form-label" >Alumno</label>
+            <input class="form-control" list="datalistOptions" id="alumnosDataList" placeholder="Escribe para buscar..." onchange="actualizarInfo(this)" size="50">
+            <datalist id="datalistOptions">
+            </datalist>
+          </div>
+
+          <div class="elemento2">
+            <label for="correoInst" class="form-label">Correo Institucional</label>
+            <br>
+            <input type="email" class="form-control"  id="correoInst" size="40"> 
+        </div>
+
+        <div class="elemento3">
+            <label for="celAlumno" class="form-label">Celular del Alumno</label>
+            <br>
+            <input type="text" class="form-control" id="celAlumno" size="10">
+          </div>
+
+        <div class="elemento4">
+            <label for="correoAlumno" class="form-label">Correo personal</label>
+            <br>
+            <input type="text" class="form-control" id="correoAlumno">
+          </div>
+
+        <div class="elemento5">
+            <label for="curp" class="form-label">CURP</label>
+            <input type="text" class="form-control" id="curp">
+        </div>
+
+        <div class="elemento6">
+            <label for="direccion" class="form-label">Direccion completa</label>
+            <input type="text" class="form-control" id="direccion" size="100">
+        </div>
+  
+        <div class="elemento7">
+             <!-- 
+                <label for="grupoActivo" class="form-label">Grupo Activo</label>
+      
+              <input type="text" class="form-control" id="grupoActivo" size= "8">
+               -->
+           
+            <label for="grupoActivo" class="form-label" >Grupo Activo</label>
+            <input class="form-control"  list="listagrupo" id="grupoActivo"> 
+            <datalist id="listagrupo">
+            </datalist>
+           
+
+        </div>
+            
+        <div class="elemento8">
+              <label for="subGrupo" class="form-label">Sub Grupo</label>
+            
+              <input type="text" class="form-control" id="subGrupo" size="4">
+        </div>
+            
+        <!--
+        <div class="elemento9">
+              <label for="sexo" class="form-label">Clave de Sexo</label>
+              <br>
+              <input type="text" class="form-control" id="sexo">
+        </div>
+        -->
+        <div class="elemento9">
+           <label for="cvesex">Cve sexo</label>
+            <select class="form-select" aria-label="sexo" name="sexo" id="sexo" size="1">
+              <option value=""></option>
+              <option value="F">Femenino</option>
+              <option value="M">Masculino</option>
+            </select>
+        </div>
+        <div class="elemento10">
+              <label for="fecNac" class="form-label">Fecha Nacimiento</label>
+              <input type="text" class="form-control" id="fecNac">
+        </div>
+
+        <div class="elemento11">
+          <label for="taller" class="form-label">Taller</label>
+            
+                <!--    <input type="text" class="form-control" id="taller" size="5"> -->
+          <select class="form-select" aria-label="taller" name="taller" id="taller" size="1">
+              <option value=""></option>
+              <option value="TK">Tae Kwon Do</option>
+              <option value="DZ">Danza</option>
+          </select>
+        </div>
+
+        <div class="elemento12">
+              <label for="nombreTutor" class="form-label">Nombre del Tutor</label>
+              <br>
+              <input type="text" class="form-control" id="nomTut">
+        </div>
+
+        <div class="elemento13">
+              <label for="correoTutor" class="form-label">Correo del Tutor</label>
+              <input type="email" class="form-control" id="correoTutor">
+              
+        </div>
+
+        <div class="elemento14">
+              <label for="telCasaTutor" class="form-label">Tel. Casa Tutor</label>
+              <br>
+              <input type="tel" class="form-control" id="telCasaTutor">            
+        </div>
+        
+        <div class="elemento15">
+                <label for="celTutor" class="form-label">Celular Tutor</label>
+                <br>
+                <input type="tel" class="form-control" id="celTutor">
+        </div>
+
+        <div class="elemento16">
+              <label for="nomTutor2" class="form-label">Nombre Segundo Tutor</label>
+              <br>
+              <input type="text" class="form-control" id="nomTutor2">
+        </div>
+
+        <div class="elemento17">
+              <label for="correoTutor2" class="form-label">Correo Segundo Tutor</label>
+              <br>
+              <input type="email" class="form-control" id="correoTutor2">
+        </div>
+
+        <div class="elemento18">
+              <label for="celTut2" class="form-label" color="black">Celular Segundo Tutor</label>
+              <br>
+              <input type="tel" class="form-control" id="celTut2" size="15">
+        </div>
+
+        <div class="elemento19">
+              <label for="escProcede" class="form-label" color="black">Escuela Procedencia</label>
+              <br>
+              <input type="tel" class="form-control" id="escProcede" size="20">
+        </div>
+
+      </div>
+      <br>
+    
+    
+    <!-- <button class="button" onclick="actualiza()">Actualizar</button> -->
+    <button class="button" type="submit" >Actualizar</button>
+     
+      </form>
+    
+    <?!= include('JS') ?> <!-- aqui se incluyen los datos script -->
+
+  </body>
+</html>
